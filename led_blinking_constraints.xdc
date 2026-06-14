@@ -1,19 +1,8 @@
-module led(
-    input clk,
-    output reg led_out = 0
-);
+## 125 MHz Clock
+set_property PACKAGE_PIN K17 [get_ports clk]
+set_property IOSTANDARD LVCMOS33 [get_ports clk]
+create_clock -period 8.000 -name sys_clk [get_ports clk]
 
-reg [25:0] counter = 0;
-
-always @(posedge clk)
-begin
-    if(counter == 62_499_999)
-    begin
-        counter <= 0;
-        led_out <= ~led_out;
-    end
-    else
-        counter <= counter + 1;
-end
-
-endmodule
+## User LED LD0
+set_property PACKAGE_PIN M14 [get_ports led_out]
+set_property IOSTANDARD LVCMOS33 [get_ports led_out]
